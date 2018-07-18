@@ -1,0 +1,23 @@
+CREATE DATABASE IF NOT EXISTS `PI_database`;
+USE `PI_database`;
+CREATE TABLE IF NOT EXISTS `message_table`(
+                               `id` INT NOT NULL AUTO_INCREMENT,
+                               `messageId` INT UNSIGNED NOT NULL,
+                               `subject` TEXT NOT NULL,
+                               `from` TEXT NOT NULL,
+                               `saveLocation` TEXT NOT NULL,
+                               PRIMARY KEY(id)
+                               );
+
+
+CREATE TABLE IF NOT EXISTS `attachment_table`(
+                               `id` INT NOT NULL AUTO_INCREMENT,
+                               `attachmentId` INT UNSIGNED NOT NULL,
+                               `messageId` TEXT NOT NULL,
+                               `fileName` TEXT NOT NULL,
+                               `displayName` TEXT NOT NULL,
+                               `type` TEXT NOT NULL,
+                               `size` INT UNSIGNED NOT NULL,
+                               `savedLocation` TEXT NOT NULL,
+                               PRIMARY KEY(id)
+                               );
