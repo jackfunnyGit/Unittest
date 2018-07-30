@@ -1,5 +1,6 @@
 """
-entities : this module was generated automatically from existing database using sqlacodegen tool.
+* entities : this module was generated automatically from existing database using sqlacodegen tool.
+* sqlacodegen mysql+pymysql://root:1234@10.78.20.122:3306/PI_database > dal/entities.py
 """
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session

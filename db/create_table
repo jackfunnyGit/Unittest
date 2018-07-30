@@ -1,23 +1,27 @@
+# message_id should be declared as a longtext,otherwise can not be insert into mysql
+
 CREATE DATABASE IF NOT EXISTS `PI_database`;
 USE `PI_database`;
-CREATE TABLE IF NOT EXISTS `message_table`(
+CREATE TABLE IF NOT EXISTS `message`(
                                `id` INT NOT NULL AUTO_INCREMENT,
-                               `messageId` INT UNSIGNED NOT NULL,
+                               `message_id` TEXT  NOT NULL,
+                               `timestamp` INT UNSIGNED NOT NULL,
                                `subject` TEXT NOT NULL,
+                               `body` TEXT,
+                               `html_body` TEXT,
                                `from` TEXT NOT NULL,
-                               `saveLocation` TEXT NOT NULL,
+                               `parsable` TINYINT(1),
                                PRIMARY KEY(id)
-                               );
+                               ) CHARACTER SET utf8mb4;
 
 
-CREATE TABLE IF NOT EXISTS `attachment_table`(
+CREATE TABLE IF NOT EXISTS `attachment`(
                                `id` INT NOT NULL AUTO_INCREMENT,
-                               `attachmentId` INT UNSIGNED NOT NULL,
-                               `messageId` TEXT NOT NULL,
-                               `fileName` TEXT NOT NULL,
-                               `displayName` TEXT NOT NULL,
+                               `attachment_id` INT UNSIGNED NOT NULL,
+                               `message_id` TEXT NOT NULL,
+                               `file_name` TEXT NOT NULL,
+                               `display_name` TEXT NOT NULL,
                                `type` TEXT NOT NULL,
                                `size` INT UNSIGNED NOT NULL,
-                               `savedLocation` TEXT NOT NULL,
                                PRIMARY KEY(id)
-                               );
+                               )CHARACTER SET utf8mb4;

@@ -1,6 +1,6 @@
 from unittest import TestCase
 from dal.store import MySqlStore
-from dal.entities import MessageTable
+from dal.entities import Message
 
 MYSQL_URL = 'mysql+pymysql://root:1234@10.78.20.122:3306/Unittest_db'
 MYSQL_CREATE_TEST_TABLE = "CREATE TABLE IF NOT EXISTS `UnitestTable`(\
@@ -20,7 +20,7 @@ class TestMySqlStore(TestCase):
 
     def setUp(self):
         print("setUp...")
-        self.message = MessageTable(messageId=112, subject="JackTest", _from="Jack_NB", saveLocation="Jack_server")
+        self.message = Message(messageId=112, subject="JackTest", _from="Jack_NB", saveLocation="Jack_server")
 
     def tearDown(self):
         print("tearDown...")
@@ -30,7 +30,7 @@ class TestMySqlStore(TestCase):
         self.assertTrue(self.message.id > 0, "instance id should not be less than 0 ")
 
     def test_read_object(self):
-        data = MySqlStore.read_object(MessageTable)
+        data = MySqlStore.read_object(Message)
         self.assertTrue(len(data) > -1, "data count should be 0 or larger than 0")
 
     def test_update_object(self):
@@ -40,5 +40,5 @@ class TestMySqlStore(TestCase):
 
     def test_delete_object(self):
         MySqlStore.create_object(self.message)
-        result = MySqlStore.delete_object(self.message.id, MessageTable)
+        result = MySqlStore.delete_object(self.message.id, Message)
         self.assertFalse(result, "deleted result should be true ")

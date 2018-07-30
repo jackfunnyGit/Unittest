@@ -1,9 +1,10 @@
 from core.exceptions import NotFoundException
 from . import DatabaseSession
-from dal.entities import MessageTable
+from dal.entities import Message, Attachment
 
 
 class MySqlStore:
+    # basic function CRUD for
     @staticmethod
     def create_object(entity):
         with DatabaseSession() as session:
@@ -11,6 +12,14 @@ class MySqlStore:
             session.flush()
             session.commit()
         return entity
+
+    @staticmethod
+    def create_objects(entities):
+        with DatabaseSession() as session:
+            session.add_all(entities)
+            session.flush()
+            session.commit()
+        return entities
 
     @staticmethod
     def read_object(entity):
@@ -54,14 +63,28 @@ class MySqlStore:
 class MessageStore(MySqlStore):
     # define by yourself
     def __init__(self):
-        self.entity = MessageTable
+        self.entity = Message
 
     def _transfer_to_entity(self, message_dic):
-        entity = self.entity
-        # extract message to entity
-        entity = message_dic
-        return entity
+        entity_obj = Message(**message_dic)
+        return entity_obj
 
     def insert_new_message(self, message_dic):
         entity = self._transfer_to_entity(message_dic)
         return self.create_object(entity)
+
+
+class AttachmentStore(MySqlStore):
+    def __init__(self):
+        self.entity = Attachment
+
+    def _transfer_to_entities(self, attachments_dic):
+        entity_objs = []
+        for attachment_dic in attachments_dic:
+            entity_obj = Attachment(**attachment_dic)
+            entity_objs.append(entity_obj)
+        return entity_objs
+
+    def insert_new_attachment(self, attachments_dic):
+        entity = self._transfer_to_entities(attachments_dic)
+        return self.create_objects(entity)

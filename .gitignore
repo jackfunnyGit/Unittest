@@ -105,4 +105,7 @@ ENV/
 #.idea
 .idea/
 
+#PI_folder should remove in the future
+#PI folder should saved in the remote location
+PI_folder/
 

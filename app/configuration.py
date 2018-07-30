@@ -10,4 +10,15 @@ connection_strings = {
             + PASSWORD + "@"
             + IP_ADDRESS_OF_MYSQL_SERVER + "/"
             + DATABASE_NAME
+            + "?charset=utf8mb4"
 }
+"""
+* Below is used for email message  
+"""
+
+# properties of the message headers
+PR_TRANSPORT_MESSAGE_HEADERS = "http://schemas.microsoft.com/mapi/proptag/0x007D001F"
+# properties of the smtp address
+PR_SMTP_ADDRESS = "http://schemas.microsoft.com/mapi/proptag/0x39FE001E"
+
+
